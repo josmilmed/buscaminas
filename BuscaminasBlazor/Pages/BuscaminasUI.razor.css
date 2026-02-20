@@ -1,0 +1,15 @@
+.casilla{
+    width: 30px;
+    height: 30px;
+}
+
+button.casilla{
+    padding: 0;
+}
+
+div.casilla{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: grey;
+}

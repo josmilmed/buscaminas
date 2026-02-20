@@ -1,0 +1,57 @@
+﻿@page "/buscaminas"
+@using Buscaminas
+
+@inject Tablero Tablero
+
+<h3>Buscaminas</h3>
+
+<div style="display: grid; grid-template-columns: repeat(@Tablero.Columnas, 30px); gap: 2px;">
+    @for (int i = 0; i < Tablero.Filas; i++)
+    {
+        for (int j = 0; j < Tablero.Columnas; j++)
+        {
+            Casilla c = Tablero.Casillas[i,j];
+            if (!c.Revelada)
+            {
+                <button class="casilla"
+                    @onclick='BuscarMina(i,j)' 
+                    @oncontextmenu="MarcarCasilla(i,j)" @oncontextmenu:preventDefault="true">
+                    @if (c.Marcada)
+                    {
+                        @("🏴")
+                    }
+                </button>
+            }
+            else
+            {
+                <div class="casilla">
+                    @if (c.TieneMina)
+                    {
+                       <span>💣</span>
+                    }
+                    else if (c.MinasAdyacentes > 0)
+                    {
+                        <span>@Tablero.Casillas[i, j].MinasAdyacentes</span>
+                    }
+                </div>
+            }
+        }
+    }
+</div>
+<div style="margin-top: 20px">
+    <button @onclick="ReiniciarJuego()" class="btn btn-primary">Volver a empezar</button>
+</div>
+
+@code {
+    Action BuscarMina(int i, int j){
+        return () => Tablero.BuscarMina(i, j);
+    }
+
+    Action MarcarCasilla(int i, int j){
+        return () => Tablero.MarcarCasilla(i, j);
+    }
+
+    Action ReiniciarJuego(){
+        return () => Tablero.Reset();
+    }
+}
