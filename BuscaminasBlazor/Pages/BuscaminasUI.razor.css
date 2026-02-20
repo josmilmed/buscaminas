@@ -1,10 +1,13 @@
 .casilla{
     width: 30px;
     height: 30px;
+    border: 0;
 }
 
 button.casilla{
     padding: 0;
+    background-color: rebeccapurple;
+    box-shadow: 1px 1px 5px 1px green;
 }
 
 div.casilla{
@@ -12,4 +15,5 @@ div.casilla{
     align-items: center;
     justify-content: center;
     color: grey;
+    
 }
